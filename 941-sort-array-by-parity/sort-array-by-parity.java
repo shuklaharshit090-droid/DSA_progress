@@ -13,16 +13,16 @@ class Solution {
             i++;
             h--;
         }
-        if(nums[i]%2==0 && nums[h]%2==0)
+        else if(nums[i]%2==0 && nums[h]%2==0)
         {
             i++;
         }
-        if(nums[i]%2==0 && nums[h]%2!=0)
+        else if(nums[i]%2==0 && nums[h]%2!=0)
         {
             i++;
             h--;
         }
-        if(nums[i]%2!=0 && nums[h]%2!=0)
+        else
         {
             h--;
         }
