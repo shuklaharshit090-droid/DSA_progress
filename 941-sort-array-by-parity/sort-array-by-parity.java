@@ -1,10 +1,5 @@
 class Solution {
-    public void swap(int[] nums,int i,int j)
-    {
-        int temp=nums[i];
-        nums[i]=nums[j];
-        nums[j]=temp;
-    }
+    
     public int[] sortArrayByParity(int[] nums) {
        int i=0;
        int h=nums.length-1;
@@ -12,7 +7,9 @@ class Solution {
        {
         if(nums[i]%2!=0 && nums[h]%2==0)
         {
-            swap(nums,i,h);
+            int temp=nums[i];
+        nums[i]=nums[h];
+        nums[h]=temp;
             i++;
             h--;
         }
