@@ -14,20 +14,35 @@
  * }
  */
 class Solution {
-    int sum=0;
-    public void dfs(TreeNode root,int cn)
-    {
-        if(root==null) return;
-        cn=cn*10+root.val;
-        if(root.left==null && root.right==null)
+    public class pair{
+        TreeNode node;
+        int cn;
+        pair(TreeNode node,int cn)
         {
-            sum+=cn;
+            this.node=node;
+            this.cn=cn;
         }
-        dfs(root.left,cn);
-        dfs(root.right,cn);
     }
     public int sumNumbers(TreeNode root) {
-       dfs(root,0); 
-       return sum;
+        if(root==null) return 0;
+        int sum=0;
+        // int cn=0;
+        Stack<pair>st=new Stack<>();
+        pair val=new pair(root,0);
+        st.push(val);
+        while(!st.isEmpty())
+        {
+            pair a=st.pop();
+            TreeNode node=a.node;
+            int cn=a.cn;
+            cn=cn*10+node.val;
+            if(node.left==null && node.right==null)
+            {
+                sum+=cn;
+            }
+            if(node.left!=null) st.push(new pair(node.left,cn));
+            if(node.right!=null) st.push(new pair(node.right,cn));
+        }
+        return sum;
     }
 }
