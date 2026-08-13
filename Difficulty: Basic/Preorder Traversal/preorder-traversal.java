@@ -11,16 +11,17 @@ class Node {
 }*/
 
 class Solution {
-    public void preorder(ArrayList<Integer>ans,Node root)
-    {
-        if(root==null) return;
-        ans.add(root.data);
-        preorder(ans,root.left);
-        preorder(ans,root.right);
-    }
     public ArrayList<Integer> preOrder(Node root) {
-       ArrayList<Integer>ans =new ArrayList<>();
-       preorder(ans,root);
-       return ans;
+      ArrayList<Integer>ans=new ArrayList<>();
+      if(root==null) return ans;
+      Stack<Node>st=new Stack<>();
+      st.push(root);
+      while(!st.isEmpty()){
+          Node temp=st.pop();
+          if(temp.right!=null) st.push(temp.right);
+          if(temp.left!=null) st.push(temp.left);
+          ans.add(temp.data);
+      }
+      return ans;
     }
 }
