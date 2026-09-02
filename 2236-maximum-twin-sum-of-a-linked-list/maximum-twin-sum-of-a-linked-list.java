@@ -29,7 +29,7 @@ class Solution {
             prev=curr;
             curr=next;
         }
-        ListNode head2=prev;
+        // ListNode head2=prev;
         int maxsum=0;
         while(temp!=null && prev!=null)
         {
