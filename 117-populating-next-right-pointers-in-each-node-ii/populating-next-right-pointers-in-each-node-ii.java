@@ -23,10 +23,10 @@ class Node {
 
 class Solution {
     public Node connect(Node root) {
-        ArrayList<ArrayList<Node>>ans=new ArrayList<>();
         if(root==null) return null;
         Queue<Node>qt=new LinkedList<>();
-        qt.offer(root);
+        ArrayList<ArrayList<Node>>arr=new ArrayList<>();
+        qt.add(root);
         while(!qt.isEmpty())
         {
             int size=qt.size();
@@ -38,20 +38,19 @@ class Solution {
                 if(temp.right!=null) qt.offer(temp.right);
                 a.add(temp);
             }
-            ans.add(a);
+            arr.add(a);
         }
-        for(ArrayList<Node> t:ans)
+        for(ArrayList<Node>t:arr)
         {
-            int size=t.size();
-            for(int i=0;i<size;i++)
+            for(int i=0;i<t.size();i++)
             {
-                if(i>=0 && i<size-1){
-                t.get(i).next=t.get(i+1);
-            }
-               if(i==size-1)
-               {
-                t.get(i).next=null;
-               }
+                if(i>=0 && i!=t.size()-1)
+                {
+                    t.get(i).next=t.get(i+1);
+                }
+                else{
+                    t.get(i).next=null;
+                }
             }
         }
         return root;
