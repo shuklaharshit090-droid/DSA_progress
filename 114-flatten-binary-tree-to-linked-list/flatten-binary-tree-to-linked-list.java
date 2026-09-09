@@ -14,21 +14,21 @@
  * }
  */
 class Solution {
-    public void dfs(TreeNode root,ArrayList<TreeNode>ans)
+    public void dfs(ArrayList<TreeNode>ans,TreeNode root)
     {
-        if(root==null)return;
+        if(root==null) return;
         ans.add(root);
-        dfs(root.left,ans);
-        dfs(root.right,ans);
+        dfs(ans,root.left);
+        dfs(ans,root.right);
     }
     public void flatten(TreeNode root) {
-        if(root==null) return;
         ArrayList<TreeNode>ans=new ArrayList<>();
-        dfs(root,ans);
+        if(root==null) return;
+         dfs(ans,root);
         for(int i=0;i<ans.size()-1;i++)
         {
-             ans.get(i).right=ans.get(i+1);
-             ans.get(i).left=null;
+          ans.get(i).right=ans.get(i+1);
+          ans.get(i).left=null;
         }
         ans.get(ans.size()-1).right=null;
         ans.get(ans.size()-1).left=null;
