@@ -13,38 +13,35 @@
  *     }
  * }
  */
- class Quad{
-    int max;
+ public class Quad{
     int min;
+    int max;
+    boolean bst;
     int sum;
-    boolean isBst;
-    Quad(int max,int min,int sum,boolean isBst)
-    {
-        this.max=max;
+    Quad(int min,int max,boolean bst,int sum){
         this.min=min;
+        this.max=max;
+        this.bst=bst;
         this.sum=sum;
-        this.isBst=isBst;
     }
  }
 class Solution {
     int maxsum=0;
-    public Quad maxmin(TreeNode root) {
-        if(root==null) return new Quad(Integer.MIN_VALUE,Integer.MAX_VALUE,0,true);
-        Quad lst=maxmin(root.left);
-        Quad rst=maxmin(root.right);
-        int max=Math.max(root.val,Math.max(lst.max,rst.max));
+    public Quad minmaxsum(TreeNode root){
+        if(root==null) return new Quad(Integer.MAX_VALUE,Integer.MIN_VALUE,true,0);
+        Quad lst=minmaxsum(root.left);
+        Quad rst=minmaxsum(root.right);
         int min=Math.min(root.val,Math.min(lst.min,rst.min));
-        boolean isBst=lst.isBst && rst.isBst && root.val>lst.max && root.val<rst.min;
-        int sum=root.val+lst.sum+rst.sum;
-        if(isBst)
-        {
-          maxsum=Math.max(maxsum,sum);
+        int max=Math.max(root.val,Math.max(lst.max,rst.max));
+        boolean bst=lst.bst && rst.bst && root.val>lst.max && root.val<rst.min;
+        int sum=lst.sum+rst.sum+root.val;
+        if(bst){
+            maxsum=Math.max(maxsum,sum);
         }
-        return new Quad(max,min,sum,isBst);
+        return new Quad(min,max,bst,sum);
     }
-    public int maxSumBST(TreeNode root)
-        {
-            maxmin(root);
-            return maxsum;
-        }
+    public int maxSumBST(TreeNode root) {
+        minmaxsum(root);
+        return maxsum;
+    }
 }
