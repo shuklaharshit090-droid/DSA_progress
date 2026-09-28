@@ -21,10 +21,6 @@ class Solution {
         long leftsum=splitter(root.left);
         long rightsum=splitter(root.right);
         long sum=root.val+leftsum+rightsum;
-        // if(root.left!=null && root.right!=null) sum=root.val+root.left.val+root.right.val;
-        // if(root.left==null && root.right==null) sum=root.val+0+0;
-        // if(root.left==null && root.right!=null) sum=root.val+root.right.val;
-        // if(root.left!=null && root.right==null) sum=root.val+root.left.val;
         maxprod=Math.max(maxprod,sum*(totalsum-sum));
         return sum;
     }
