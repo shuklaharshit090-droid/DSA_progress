@@ -9,13 +9,12 @@
  * }
  */
 class Solution {
-    public static ListNode reverse(ListNode head)
+    public ListNode reverse(ListNode temp)
     {
-        ListNode curr=head;
+        ListNode curr=temp;
         ListNode next=null;
         ListNode prev=null;
-        while(curr!=null)
-        {
+        while(curr!=null){
             next=curr.next;
             curr.next=prev;
             prev=curr;
@@ -24,29 +23,25 @@ class Solution {
         return prev;
     }
     public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
-        ListNode nhead1=reverse(l1);
-        ListNode nhead2=reverse(l2);
-        ListNode temp1=nhead1;
-        ListNode temp2=nhead2;
+        ListNode prev1=reverse(l1);
+        ListNode prev2=reverse(l2);
         ListNode dummy=new ListNode(-1);
-        ListNode cur=dummy;
+        ListNode temp=dummy;
         int carry=0;
-        while(temp1!=null || temp2!=null || carry!=0)
+        while(prev1!=null||prev2!=null||carry!=0)
         {
             int sum=carry;
-            if(temp1!=null)
-            {
-                sum+=temp1.val;
-                temp1=temp1.next;
+            if(prev1!=null){
+            sum+=prev1.val;
+            prev1=prev1.next;
             }
-            if(temp2!=null)
-            {
-                sum+=temp2.val;
-                temp2=temp2.next;
+            if(prev2!=null){
+            sum+=prev2.val;
+            prev2=prev2.next;
             }
             carry=sum/10;
-            cur.next=new ListNode(sum%10);
-            cur=cur.next;
+            temp.next=new ListNode(sum%10);
+            temp=temp.next;
         }
         return reverse(dummy.next);
     }
