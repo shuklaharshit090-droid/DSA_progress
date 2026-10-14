@@ -10,39 +10,30 @@
  */
 class Solution {
     public ListNode partition(ListNode head, int x) {
-    ListNode less=new ListNode(-101); 
-    ListNode les=less;
-    ListNode more=new ListNode(-101);
-    ListNode mor=more;
-    ListNode temp=head;
-    while(temp!=null)
-    {
-        if(temp.val<x)
+        ListNode dummy1=new ListNode(-101);
+        ListNode dummy2=new ListNode(-101);
+        ListNode temp=head;
+        ListNode temp1=dummy1;
+        ListNode temp2=dummy2;
+        while(temp!=null)
         {
-            less.next=new ListNode(temp.val);
-            less=less.next;
+            if(temp.val>=x)
+            {
+                temp2.next=new ListNode(temp.val);
+                temp2=temp2.next;
+            }
+            else{
+                temp1.next=new ListNode(temp.val);
+                temp1=temp1.next;
+            }
+            temp=temp.next;
         }
-        else{
-            more.next=new ListNode(temp.val);
-            more=more.next;
+        ListNode t=dummy1;
+        while(t.next!=null)
+        {
+            t=t.next;
         }
-        temp=temp.next;
-    }
-    ListNode dummy=new ListNode(-101);
-    ListNode curr=dummy;
-    while(les.next!=null)
-    {
-        curr.next=les.next;
-        curr=curr.next;
-        les=les.next;
-    }   
-    while(mor.next!=null)
-    {
-        curr.next=mor.next;
-        curr=curr.next;
-        mor=mor.next;
-    }
-    curr.next=null;
-    return dummy.next;
+        t.next=dummy2.next;
+        return dummy1.next;
     }
 }
