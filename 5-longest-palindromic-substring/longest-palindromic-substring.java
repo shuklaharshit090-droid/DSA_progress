@@ -1,34 +1,37 @@
 class Solution {
+    public boolean isPalin(String s)
+    {
+        for(int x=0;x<s.length()/2;x++)
+        {
+            if(s.charAt(x)!=s.charAt(s.length()-1-x))
+            return false;
+        }
+        return true;
+    }
     public String longestPalindrome(String s) {
-      int n=s.length();
-      if(s.length()<=1) return s;
-      String ans="";
-      for(int i=1;i<n;i++)
-      {
-        int low=i;
-        int high=i;
-        while(low>=0 && high<n && s.charAt(low)==s.charAt(high)){
-            low--;
-            high++;
-        }
-        String palin=s.substring(low+1,high);
-        if(ans.length()<palin.length())
+        int l=0,r=s.length()-1;
+        String st=s.charAt(0)+"",w="";
+        int stl=0;
+        char c1,c2;
+        for(int x=0;x<s.length();x++)
         {
-            ans=palin;
+            l=x;
+            r=s.length()-1;
+            while(l<r)
+            {
+                w=s.substring(l,r+1);
+                c1=s.charAt(l);
+                c2=s.charAt(r);
+                
+                if(c1==c2 &&w.length()>stl && isPalin(w))
+                {
+                    st=w;
+                    stl=st.length();
+                }
+                else
+                r--;
+            }
         }
-        low=i-1;
-        high=i;
-        while(low>=0 && high<n && s.charAt(low)==s.charAt(high))
-        {
-            low--;
-            high++;
-        }
-        String palin2=s.substring(low+1,high);
-        if(ans.length()<palin2.length())
-        {
-            ans=palin2;
-        }
-      }  
-      return ans;
+        return st;
     }
 }
