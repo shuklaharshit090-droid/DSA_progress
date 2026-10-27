@@ -1,20 +1,33 @@
 class Solution {
-    public void dfs(int[][] image,int i,int j,int color,int oldcolor)
-    {
-        if(i<0||j<0||i>=image.length||j>=image[0].length||image[i][j]!=oldcolor){
-            return;
-        }
-        if(image[i][j]==color) return;
-        image[i][j]=color;
-        dfs(image,i+1,j,color,oldcolor); 
-        dfs(image,i-1,j,color,oldcolor);
-        dfs(image,i,j-1,color,oldcolor);
-        dfs(image,i,j+1,color,oldcolor);
-    }
     public int[][] floodFill(int[][] image, int sr, int sc, int color) {
-        int oldcolor=image[sr][sc];
-        if(oldcolor==color) return image;
-        dfs(image,sr,sc,color,oldcolor);
-        return image;
+       int m=image.length;
+       int n=image[0].length;
+       int oldcolor=image[sr][sc];
+       if(oldcolor==color) return image;
+       boolean[][] visited=new boolean[m][n];
+       Queue<int[]>qt=new LinkedList<>();
+       int[] dx={-1,1,0,0};
+       int[] dy={0,0,-1,1};
+       qt.offer(new int[]{sr,sc});
+       visited[sr][sc]=true;
+       image[sr][sc]=color;
+       while(!qt.isEmpty())
+       {
+         int cell[]=qt.poll();
+         int r=cell[0];
+         int c=cell[1];
+         for(int i=0;i<4;i++)
+         {
+            int nr=r+dx[i];
+            int nc=c+dy[i];
+            
+            if(nr>=0 && nc>=0 && nr<m && nc<n && !visited[nr][nc] && image[nr][nc]==oldcolor){
+                image[nr][nc]=color;
+                visited[nr][nc]=true;
+                qt.offer(new int[]{nr,nc});
+            }
+         }
+       } 
+       return image; 
     }
 }
