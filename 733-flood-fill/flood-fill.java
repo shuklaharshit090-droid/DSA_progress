@@ -1,19 +1,20 @@
 class Solution {
-    public void dfs(int [][] grid,int i,int j,int oldcolor,int color){
-        if(i<0 || i>=grid.length || j<0 || j>=grid[0].length){
+    public void dfs(int[][] image,int i,int j,int color,int oldcolor)
+    {
+        if(i<0||j<0||i>=image.length||j>=image[0].length||image[i][j]!=oldcolor){
             return;
         }
-        if(grid[i][j]!=oldcolor) return;
-        grid[i][j]=color;
-        dfs(grid,i+1,j,oldcolor,color);
-        dfs(grid,i-1,j,oldcolor,color);
-        dfs(grid,i,j-1,oldcolor,color);
-        dfs(grid,i,j+1,oldcolor,color);
+        if(image[i][j]==color) return;
+        image[i][j]=color;
+        dfs(image,i+1,j,color,oldcolor); 
+        dfs(image,i-1,j,color,oldcolor);
+        dfs(image,i,j-1,color,oldcolor);
+        dfs(image,i,j+1,color,oldcolor);
     }
     public int[][] floodFill(int[][] image, int sr, int sc, int color) {
         int oldcolor=image[sr][sc];
         if(oldcolor==color) return image;
-        dfs(image,sr,sc,oldcolor,color);
+        dfs(image,sr,sc,color,oldcolor);
         return image;
     }
 }
