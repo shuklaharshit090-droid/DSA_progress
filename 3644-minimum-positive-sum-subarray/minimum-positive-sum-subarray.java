@@ -10,9 +10,9 @@ class Solution {
                 }
             for(int j=i+1;j<n;j++)
             {
-                // if(j-i>=l && j-i<=r && sum>0){
-                //     min=Math.min(sum,min);
-                // }
+                if(j-i>=l && j-i<=r && sum>0){
+                    min=Math.min(sum,min);
+                }
                 sum+=nums.get(j);
                 if(j-i+1>=l && j-i+1<=r && sum>0){
                     min=Math.min(min,sum);
