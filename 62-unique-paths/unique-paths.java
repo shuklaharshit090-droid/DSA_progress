@@ -1,15 +1,21 @@
 class Solution {
-    public int solve(int memo[][],int i,int j,int m,int n){
-        if(i==m-1 && j==n-1) return memo[i][j]=1;
-        if(i>=m||j>=n) return 0;
-        if(memo[i][j]!=-1) return memo[i][j];
-        return memo[i][j]=solve(memo,i+1,j,m,n)+solve(memo,i,j+1,m,n);
-    }
     public int uniquePaths(int m, int n) {
-        int memo[][]=new int[m][n];
-        for(int a[]:memo){
-            Arrays.fill(a,-1);
+        int dp[][]=new int[m][n];
+        dp[0][0]=1;
+        int i=0;
+        for(int j=1;j<n;j++){
+            dp[i][j]=1;
         }
-        return solve(memo,0,0,m,n);
+        int y=0;
+        for(int x=1;x<m;x++){
+            dp[x][y]=1;
+        }
+        for(i=1;i<m;i++)
+        {
+            for(y=1;y<n;y++){
+            dp[i][y]=dp[i-1][y]+dp[i][y-1];
+            }
+        }
+        return dp[m-1][n-1];
     }
 }
